@@ -15,7 +15,4 @@ for line in sys.stdin:
         if not found_char:
             char_count += 1
 print('Final floor %d' % level)
-if found_char:
-    print('Reached floor %d after at character %d' % (find_level, found_char))
-else:
-    print('Santa never reaches floor %d' % find_level)
+print('Reached floor %d after at character %d' % (find_level, found_char))
