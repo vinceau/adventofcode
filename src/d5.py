@@ -2,11 +2,9 @@
 
 import sys
 
-#no good strings
-ng = ['ab', 'cd', 'pq', 'xy']
-
+#part 1
 def is_nice(word):
-    if any(w in word for w in ng):
+    if any(w in word for w in ['ab', 'cd', 'pq', 'xy']):
         return False
     vowel_count = sum(word.count(v) for v in ['a', 'e', 'i', 'o', 'u'])
     if vowel_count < 3:
