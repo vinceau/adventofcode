@@ -14,8 +14,27 @@ def is_nice(word):
             return True
     return False
 
+#part 2
+def is_nice2(word):
+    passed = False
+    for i in range(len(word)-1):
+        sub = word[i: i+2]
+        if sub in word[:i] or sub in word[i+2:]:
+            passed = True
+            break
+    if not passed:
+        return False
+    for i in range(len(word)-2):
+        if word[i] == word[i+2]:
+            return True
+    return False
+
 nice = 0
+nice2 = 0
 for line in sys.stdin:
     if is_nice(line):
         nice += 1
+    if is_nice2(line):
+        nice2 += 1
 print('Part 1: There are %d nice words' % nice)
+print('Part 2: There are %d nice words' % nice2)
