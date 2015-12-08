@@ -8,9 +8,9 @@ def wrap(dims):
 
 def ribbon(dims):
     nums = map(int, dims.split('x'))
-    sides = list(nums)
-    sides.remove(max(sides))
-    return 2*sum(sides) + reduce(mul, nums, 1)
+    product = reduce(mul, nums, 1)
+    nums.remove(max(nums))
+    return 2*sum(nums) + product
 
 total = 0
 ribbon_total = 0
