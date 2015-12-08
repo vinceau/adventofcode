@@ -2,10 +2,7 @@ import sys
 from operator import mul
 
 def wrap(dims):
-    nums = map(int, dims.split('x'))
-    l = nums[0]
-    w = nums[1]
-    h = nums[2]
+    l, w, h = map(int, dims.split('x'))
     nums = [l*w, w*h, h*l]
     return min(nums) + 2*sum(nums)
 
