@@ -22,11 +22,10 @@ def is_nice2(word):
         if sub in word[i+2:]:
             passed = True
             break
-    if not passed:
-        return False
-    for i in range(len(word)-2):
-        if word[i] == word[i+2]:
-            return True
+    if passed:
+        for i in range(len(word)-2):
+            if word[i] == word[i+2]:
+                return True
     return False
 
 nice = 0
