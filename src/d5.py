@@ -19,7 +19,7 @@ def is_nice2(word):
     passed = False
     for i in range(len(word)-1):
         sub = word[i: i+2]
-        if sub in word[:i] or sub in word[i+2:]:
+        if sub in word[i+2:]:
             passed = True
             break
     if not passed:
