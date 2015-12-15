@@ -31,7 +31,6 @@ def set_wire(a, operation, b, c):
     elif operation == 'RSHIFT':
         res = b >> c
     wires[a] = res & 0xFFFF #we need the & 0xFFFF part to make it 16 bit
-    return True
 
 def convert(wire):
     """If wire is actually a number, return it as an int. Otherwise return the
@@ -64,7 +63,8 @@ def execute_line(line):
         set_dependency(a, b)
         return False
     b = convert(b)
-    return set_wire(a, op, b, c)
+    set_wire(a, op, b, c)
+    return True
 
 def backtrack(wire, line):
     """Backtrack through dependencies until line gets executed
