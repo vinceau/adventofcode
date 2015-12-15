@@ -68,16 +68,11 @@ def backtrack(wire, line):
     while not execute_line(line):
         w = list(dependencies[wire])[0]
         dependencies[wire].remove(w)
-        prev_line = backlog.get(w)
-        if prev_line == None:
-            continue
-        if not execute_line(prev_line):
-            #sigh, it depends on something else
+        prev_line = backlog.pop(w, None)
+        if prev_line != None:
             backtrack(w, prev_line)
-            execute_line(prev_line)
 
 for line in sys.stdin:
-#   print(line.strip())
     if not execute_line(line): #operation failed
         wire = line.split()[-1]
         backlog[wire] = line
