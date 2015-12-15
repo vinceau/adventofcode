@@ -6,17 +6,13 @@ wires = {}
 dependencies = {}
 backlog = {}
 
-def valid_dependency(w):
-    if w in wires.keys():
-        return False
-    return type(w).__name__ == 'str' and not w.isdigit()
-
 def set_dependency(a, b):
+    """Set a to depend on b
+    """
     d = dependencies.get(a)
     if d == None:
         d = set()
-    if valid_dependency(b):
-        d.add(b)
+    d.add(b)
     dependencies[a] = d
 
 def set_wire(a, operation, b, c):
