@@ -18,23 +18,6 @@ def set_dependency(a, b):
 def set_wire(a, operation, b, c):
     """Assign the value of operation on wire b to wire a
     """
-    try:
-        b = int(b)
-    except ValueError:
-        try:
-            b = wires[b]
-        except KeyError:
-            set_dependency(a, b)
-            return False
-    if c:
-        try:
-            c = int(c)
-        except ValueError:
-            try:
-                c = wires[c]
-            except KeyError:
-                set_dependency(a, c)
-                return False
     if operation == '->':
         res = b
     if operation == 'NOT':
@@ -50,6 +33,15 @@ def set_wire(a, operation, b, c):
     wires[a] = res & 0xFFFF #we need the & 0xFFFF part to make it 16 bit
     return True
 
+def convert(wire):
+    """If wire is actually a number, return it as an int. Otherwise return the
+    signal that wire provides.
+    """
+    try:
+        return int(wire)
+    except ValueError:
+        return wires.get(wire)
+
 def execute_line(line):
     """Attempt to execute the instructions in the given line.
     """
@@ -58,12 +50,20 @@ def execute_line(line):
     if len(parts) == 5:
         #AND, OR, LSHIFT, RSHIFT
         b, op, c, _, a = parts
+        if convert(c) == None:
+            set_dependency(a, c)
+            return False
+        c = convert(c)
     elif len(parts) == 4:
         #NOT
         op, b, _, a = parts
     elif len(parts) == 3:
         #signal provide ->
         b, op, a = parts
+    if convert(b) == None:
+        set_dependency(a, b)
+        return False
+    b = convert(b)
     return set_wire(a, op, b, c)
 
 def backtrack(wire, line):
