@@ -5,7 +5,7 @@ import sys
 size = 1000
 
 #part 1
-matrix = [[False for _ in range(size)] for _ in range(size)]
+matrix = [[False] * size for _ in range(size)]
 
 def count(mat):
     return sum(sum(x) for x in mat)
@@ -25,7 +25,7 @@ def toggle(coord1, coord2):
             matrix[x][y] = not matrix[x][y]
 
 #part 2
-matrix2 = [[0 for _ in range(size)] for _ in range(size)]
+matrix2 = [[0] * size for _ in range(size)]
 
 def turn2(onoff, coord1, coord2):
     x1, y1 = [int(x) for x in coord1.split(',')]
