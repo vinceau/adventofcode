@@ -1,14 +1,14 @@
-# Advent of Code (Python2 solutions)
+# Advent of Code (Python solutions)
 
 ## Usage
 In a terminal, either use:
 
 ```bash
-day1.py < input.txt
+run.py < input.txt
 ```
 
 or
 
 ```bash
-cat input.txt | day1.py
+cat input.txt | run.py
 ```
