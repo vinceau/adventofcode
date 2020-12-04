@@ -42,6 +42,8 @@ def valid_field(field, value):
     elif field == "ecl":
         return value in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
     elif field == "pid":
+        # Gotcha 2. We have to check the length of the pid
+        # since the regex will match values longer than 9 characters.
         return len(value) == 9 and bool(re.match("^[0-9]{9}", value))
 
     return False
@@ -77,7 +79,8 @@ def main():
                 passports.append(current_passport)
                 current_passport = None
 
-    # Add the last passport if there's no newline
+    # Gotcha 1. There's no newline character at the end
+    # of the file so we have to manually add it.
     if current_passport is not None:
         # print("we still have a passport")
         # print(current_passport)
