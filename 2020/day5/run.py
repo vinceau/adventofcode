@@ -33,17 +33,21 @@ def calculate_seat_id(row, column):
     return row * 8 + column
 
 def find_seat(seats):
+    """
+    Our seat is the one which is missing a number.
+    """
     seat_ids = seats.copy()
     seat_ids.sort()
+    # Start tracking from the first number
     last_seat = seat_ids[0]
     for num in seat_ids[1:]:
+        # Check if we missed a number
         if num == last_seat + 2:
             return last_seat + 1
         last_seat = num
     return -1
 
 def main():
-    # allow the map to be indexable
     seat_ids = []
     for line in sys.stdin:
         l = line.strip()
@@ -55,8 +59,8 @@ def main():
             seat_ids.append(calculate_seat_id(row, col))
 
     print("part 1")
-    max_id = f"largest seat id: {max(seat_ids)}"
-    print(max_id)
+    max_id = max(seat_ids)
+    print(f"largest seat id: {max_id}")
 
 
     print("part 2")
