@@ -1,21 +1,10 @@
-import re
 import sys
 
-REQUIRED_FIELDS = [
-    "byr",
-    "iyr",
-    "eyr",
-    "hgt",
-    "hcl",
-    "ecl",
-    "pid"
-]
-
-def binary_space_partition(front_or_back, lst):
+def binary_space_partition(letter, lst):
     pivot = int(len(lst) / 2)
-    if front_or_back == "front":
+    if letter == "F" or letter == "L":
         return lst[:pivot]
-    elif front_or_back == "back":
+    elif letter == "B" or letter == "R":
         return lst[pivot:]
     return lst
 
@@ -23,10 +12,7 @@ def binary_space_partition(front_or_back, lst):
 def partition(commands, max_length):
     lst = range(max_length)
     for letter in commands:
-        if letter == "F" or letter == "L":
-            lst = binary_space_partition("front", lst)
-        elif letter == "B" or letter == "R":
-            lst = binary_space_partition("back", lst)
+        lst = binary_space_partition(letter, lst)
     return lst[0]
 
 def calculate_seat_id(row, column):
